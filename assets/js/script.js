@@ -8,7 +8,14 @@ function setupNavToggle(toggleId, navId){
   btn.addEventListener('click', ()=>{
     const list = nav.querySelector('.nav-list');
     if(list){
-      list.classList.toggle('open');
+      const isOpen = list.classList.toggle('open');
+      // Accessibility: reflect expanded state
+      btn.setAttribute('aria-expanded', String(isOpen));
+      if(isOpen){
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
     }
   });
 }
